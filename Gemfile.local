@@ -1,0 +1,13 @@
+group :test do
+  gem 'simplecov-rcov', require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'launchy'
+  gem 'database_cleaner'
+end
+
+# for Debug
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
+end
