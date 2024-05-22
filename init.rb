@@ -21,8 +21,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 require 'redmine'
-require 'issue_templates/issues_hook'
-require 'issue_templates/journals_hook'
+Rails.configuration.to_prepare do
+  require 'issue_templates/issues_hook'
+  require 'issue_templates/journals_hook'
+end
 
 # NOTE: Keep error message for a while to support Redmine3.x users.
 def issue_template_version_message(original_message = nil)
@@ -47,7 +49,7 @@ Redmine::Plugin.register :redmine_issue_templates do
     name 'Redmine Issue Templates plugin'
     author 'Akiko Takano'
     description 'Plugin to generate and use issue templates for each project to assist issue creation.'
-    version '1.0.3'
+    version '1.0.4'
     author_url 'http://twitter.com/akiko_pusu'
     requires_redmine version_or_higher: '4.0'
     url 'https://github.com/akiko-pusu/redmine_issue_templates'
