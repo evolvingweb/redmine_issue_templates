@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IssueTemplate < ActiveRecord::Base
+class IssueTemplate < ApplicationRecord
   include Redmine::SafeAttributes
   include IssueTemplateCommon
   belongs_to :project

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NoteVisibleRole < ActiveRecord::Base
+class NoteVisibleRole < ApplicationRecord
   include Redmine::SafeAttributes
 
   safe_attributes 'note_template_id', 'role_id'

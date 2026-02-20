@@ -1,4 +1,4 @@
-class IssueTemplateSetting < ActiveRecord::Base
+class IssueTemplateSetting < ApplicationRecord
   include Redmine::SafeAttributes
   belongs_to :project
 

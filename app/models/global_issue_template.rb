@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GlobalIssueTemplate < ActiveRecord::Base
+class GlobalIssueTemplate < ApplicationRecord
   include Redmine::SafeAttributes
   include IssueTemplateCommon
   validates :title, uniqueness: { scope: :tracker_id }

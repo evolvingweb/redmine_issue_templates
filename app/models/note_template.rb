@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NoteTemplate < ActiveRecord::Base
+class NoteTemplate < ApplicationRecord
   include Redmine::SafeAttributes
   include ActiveModel::Validations
 

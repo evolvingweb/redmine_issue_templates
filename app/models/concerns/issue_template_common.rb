@@ -42,7 +42,7 @@ module IssueTemplateCommon
     end
 
     # ActiveRecord::SerializationTypeMismatch may be thrown if non hash object is assigned.
-    serialize :builtin_fields_json, Hash
+    serialize :builtin_fields_json, coder: JSON, type: Hash
   end
 
   #
