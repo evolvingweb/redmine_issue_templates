@@ -13,7 +13,12 @@ module IssueTemplates
     ACTIONS = %('new' 'update_form' 'create', 'show').freeze
 
     def view_layouts_base_html_head(context = {})
-      o = stylesheet_link_tag('issue_templates', plugin: 'redmine_issue_templates')
+      # R7 dropped the legacy `icon-*` background CSS in favour of sprite_icon SVGs.
+      # This plugin still uses legacy classes (incl. bare `<span class="icon icon-add">`
+      # buttons that can't take a sprite). R7 ships a compat stylesheet that restores
+      # them — load it so our icons render. refs #108530.
+      o = stylesheet_link_tag('legacy-icons-compat')
+      o << stylesheet_link_tag('issue_templates', plugin: 'redmine_issue_templates')
       o << javascript_include_tag('issue_templates', plugin: 'redmine_issue_templates') if need_template_js?(context[:controller])
       o
     end

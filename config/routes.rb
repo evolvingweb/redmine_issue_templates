@@ -28,13 +28,17 @@ Rails.application.routes.draw do
     resources :note_templates, except: [:edit]
   end
 
-  resources :issue_templates, only: %i[load preview load_selectable_fields], concerns: [:previewable] do
+  # R7/Rails 8.1: `only:` must list standard REST actions only. These blocks exist
+  # solely to add the custom collection routes below (+ the previewable concern), so
+  # they generate NO REST routes -> only: []. (Custom actions in only: were a no-op
+  # pre-R7 and now raise.) refs #108530.
+  resources :issue_templates, only: [], concerns: [:previewable] do
     post 'load', on: :collection
     get 'load_selectable_fields', on: :collection
   end
 
   # for note temlate
-  resources :note_templates, only: %i[load preview list_templates] do
+  resources :note_templates, only: [] do
     post 'load', on: :collection
     get 'list_templates', on: :collection
   end

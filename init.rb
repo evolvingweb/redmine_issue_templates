@@ -22,13 +22,8 @@
 
 require 'redmine'
 
-# Tell Zeitwerk to ignore this plugin's lib directory
-plugin_lib = File.join(File.dirname(__FILE__), 'lib')
-Rails.autoloaders.each { |loader| loader.ignore(plugin_lib) }
-
-# Require plugin files
-require File.join(plugin_lib, 'issue_templates/issues_hook')
-require File.join(plugin_lib, 'issue_templates/journals_hook')
+# R7: no loader.ignore / manual require — the IssueTemplates::{IssuesHook,JournalsHook}
+# ViewListeners (lib/issue_templates/*.rb) self-register on Zeitwerk eager-load. refs #108530.
 
 # NOTE: Keep error message for a while to support Redmine3.x users.
 def issue_template_version_message(original_message = nil)
@@ -53,9 +48,9 @@ Redmine::Plugin.register :redmine_issue_templates do
     name 'Redmine Issue Templates plugin'
     author 'Akiko Takano'
     description 'Plugin to generate and use issue templates for each project to assist issue creation.'
-    version '6.0.0'
+    version '7.0.0'
     author_url 'http://twitter.com/akiko_pusu'
-    requires_redmine version_or_higher: '5.0'
+    requires_redmine version_or_higher: '7.0.0'
     url 'https://github.com/akiko-pusu/redmine_issue_templates'
 
     settings partial: 'settings/redmine_issue_templates',

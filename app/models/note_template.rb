@@ -25,7 +25,7 @@ class NoteTemplate < ApplicationRecord
   validates :name, presence: true
   acts_as_positioned scope: %i[project_id tracker_id]
 
-  enum visibility: { mine: 0, roles: 1, open: 2 }
+  enum :visibility, { mine: 0, roles: 1, open: 2 }
 
   scope :mine_condition, lambda { |user_id|
     where(author_id: user_id).mine if user_id.present?
